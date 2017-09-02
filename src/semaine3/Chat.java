@@ -1,6 +1,6 @@
 package semaine3;
 
-class Chat {
+public class Chat {
        
 	 	String eyes;
 	 	String color;
