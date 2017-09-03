@@ -1,19 +1,19 @@
 package semaine4;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
 public class StockHandle extends JFrame {
@@ -47,7 +47,7 @@ public class StockHandle extends JFrame {
      */
     public StockHandle() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 711, 528);
+        setBounds(100, 100, 574, 528);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -97,11 +97,48 @@ public class StockHandle extends JFrame {
         priceField.setBounds(161, 240, 116, 22);
         contentPane.add(priceField);
 
-        JLabel lblGestionDuStock = new JLabel("Gestion du stock");
-        lblGestionDuStock.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblGestionDuStock.setHorizontalAlignment(SwingConstants.CENTER);
-        lblGestionDuStock.setBounds(85, 31, 192, 22);
-        contentPane.add(lblGestionDuStock);
+        JLabel lblHome = new JLabel("Gestion du stock");
+        lblHome.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        lblHome.setHorizontalAlignment(SwingConstants.CENTER);
+        lblHome.setBounds(85, 31, 192, 22);
+        contentPane.add(lblHome);
+
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(308, 93, 240, 245);
+        contentPane.add(scrollPane);
+
+        table = new JTable();
+        table.setModel(new DefaultTableModel(
+                new Object[][] {
+                },
+                new String[] {
+                        "nom", "cat\u00E9gorie", "code", "prix"
+                }
+        ));
+        DefaultTableModel model = (DefaultTableModel) table.getModel()
+                ;		scrollPane.setViewportView(table);
+
+        JButton addButton = new JButton("Ajouter le produit");
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+
+                float price = Float.valueOf(priceField.getText());
+                int cod = Integer.valueOf(codeField.getText());
+
+                Object[] a = {nameField.getText(),categoryField.getText(),codeField.getText(),priceField.getText()};
+
+                model.addRow(a);
+
+                nameField.setText("");
+                categoryField.setText("");
+                priceField.setText("");
+                codeField.setText("");
+            }
+        });
+
+        addButton.setBounds(85, 317, 192, 25);
+        contentPane.add(addButton);
+
 
         JLabel label = new JLabel("Nom:");
         label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -114,39 +151,22 @@ public class StockHandle extends JFrame {
         deleteField.setBounds(161, 375, 116, 22);
         contentPane.add(deleteField);
 
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(326, 90, 253, 123);
-        contentPane.add(scrollPane);
-
-        table = new JTable();
-        scrollPane.setViewportView(table);
-        table.setModel(new DefaultTableModel(
-                new Object[][] {
-                        {null, null, null},
-                        {null, null, null},
-                        {null, null, null},
-                        {null, null, null},
-                        {null, null, null},
-                },
-                new String[] {
-                        "Nom", "code", "category"
-                }
-        ));
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-
-        JButton addButton = new JButton("Ajouter le produit");
-        addButton.addActionListener(new ActionListener() {
+        JButton deleteButton = new JButton("Supprimer le produit");
+        deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                String[] a = {nameField.getText(),codeField.getText(),categoryField.getText()};
-                model.addRow(a);
+
+                String search = deleteField.getText();
+                int searchIndex = 0;
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    if( search.matches(model.getValueAt(i,0).toString())){
+                        searchIndex = i;
+                    }
+                }
+                model.removeRow(searchIndex);
+                deleteField.setText("");
             }
         });
-        addButton.setBounds(85, 317, 192, 25);
-        contentPane.add(addButton);
-
-        JButton deleteButton = new JButton("Supprimer le produit");
         deleteButton.setBounds(85, 418, 192, 25);
         contentPane.add(deleteButton);
-
     }
 }
