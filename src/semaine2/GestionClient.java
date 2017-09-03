@@ -1,3 +1,4 @@
+package semaine2;
 
 import java.util.Scanner;
 

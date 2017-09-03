@@ -1,4 +1,4 @@
-package Semaine_2;
+package semaine2;
 
 import java.util.Scanner;
 
@@ -20,8 +20,8 @@ public class CalculatriceModel {
 
 	//fonction Division
 	static int Div(int a, int b) {
-		if (b == 0) {
-			System.out.println("....Erreur Tu as divisé sur Zéro");
+		if (b == 0) { // on cas ou on essaye la division par 0
+			System.out.println("Erreur Tu as divisé sur Zéro");
 			return 0;
 		}
 
@@ -48,7 +48,7 @@ public class CalculatriceModel {
 		int nbr1, nbr2;
 		Scanner sc = new Scanner(System.in);
 		do {
-			System.out.println("************************************");
+			System.out.println("debut");
 			System.out.println("####### Bienvenue Sur notre Calculatrice #######");
 			System.out.println("....pour choisir l'addition tappez -------------> (1)");
 			System.out.println("....pour choisir la Multiplication tappez ------> (2)");
