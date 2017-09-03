@@ -1,5 +1,6 @@
 package semaine4;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -100,7 +101,7 @@ public class StockHandle extends JFrame {
         JLabel lblHome = new JLabel("Gestion du stock");
         lblHome.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblHome.setHorizontalAlignment(SwingConstants.CENTER);
-        lblHome.setBounds(85, 31, 192, 22);
+        lblHome.setBounds(85, 32, 192, 22);
         contentPane.add(lblHome);
 
         JScrollPane scrollPane = new JScrollPane();
@@ -168,5 +169,17 @@ public class StockHandle extends JFrame {
         });
         deleteButton.setBounds(85, 418, 192, 25);
         contentPane.add(deleteButton);
+
+        JButton btnModifierLeProduit = new JButton("Modifier le produit");
+        btnModifierLeProduit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String a = model.getValueAt(table.getSelectedRow(),table.getSelectedColumn()).toString();
+                AlterFrame alt = new AlterFrame(a,model, table.getSelectedRow(),table.getSelectedColumn());
+                alt.setVisible(true);
+            }
+        });
+        btnModifierLeProduit.setBounds(333, 418, 192, 25);
+        contentPane.add(btnModifierLeProduit);
     }
 }
+
