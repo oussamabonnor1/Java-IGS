@@ -48,7 +48,6 @@ public class CalculatriceModel {
 		int nbr1, nbr2;
 		Scanner sc = new Scanner(System.in);
 		do {
-			System.out.println("debut");
 			System.out.println("####### Bienvenue Sur notre Calculatrice #######");
 			System.out.println("....pour choisir l'addition tappez -------------> (1)");
 			System.out.println("....pour choisir la Multiplication tappez ------> (2)");
